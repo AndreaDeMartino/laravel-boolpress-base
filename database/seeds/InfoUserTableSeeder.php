@@ -19,9 +19,10 @@ class InfoUserTableSeeder extends Seeder
 
         foreach($userData as $user){
 
+            // Ottengo id di User e li assegno al campo della UserInfo
             $newInfo = new InfoUser();
-
             $newInfo->user_id = $user->id;
+            
             $newInfo->phone = $faker->phoneNumber();
             $newInfo->address = $faker->address();
             $newInfo->avatar = $faker->imageUrl();
