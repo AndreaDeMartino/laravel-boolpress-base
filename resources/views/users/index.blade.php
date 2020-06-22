@@ -10,9 +10,15 @@
     <h2>{{ $user->name }}</h2>
     <h5>{{ $user->email }}</h5>
 
-    {{-- Dettagli della tabella joinata, richiamati tramite $user (nome public function del modello) --}}
+    {{-- Dettagli della tabella info joinata, richiamati tramite $user (nome public function del modello) --}}
     <p>Phone: {{ $user->info['phone'] }}</p>
     <p>Address: {{ $user->info['address'] }}</p>
+
+    {{-- Titoli della tabella post joinata --}}
+    @foreach($user->posts as $post)
+    <h3>Titolo Post: {{ $post['title'] }}</h3>
+    @endforeach
+
   </div>
   @endforeach
 
