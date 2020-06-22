@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/posts','PostController@index')->name('posts');
 
 // Risorsa per Tabella Users
 Route::resource('users', 'UserController');
