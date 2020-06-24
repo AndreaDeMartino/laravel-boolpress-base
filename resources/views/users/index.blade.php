@@ -6,9 +6,11 @@
 
 
     <div class="container">
+
       @foreach($users as $user)
       <div class="row d-flex justify-content-center mb-5">
         
+        {{-- User with info --}}
         <ul class="user col-6 m-4 list-group list-group-flush text-center">
           <li class="list-group-item active h6">{{ $user->name }}</li>
           <li class="list-group-item"><small>Email: {{ $user->email }}</small></li>
@@ -18,6 +20,7 @@
           <li class="list-group-item"><small>Address: {{ $user->info['address'] }}</small></li>
         </ul>
         
+        {{-- Posts of User --}}
         <div class="posts container text-center">
           <h5 class="mb-4 text-primary">Posts</h5>
           <div class="row d-flex justify-content-center">
@@ -51,13 +54,13 @@
       </div>
       <hr>
       @endforeach
+
     </div>
-  
+  </div>
+
+  {{-- Links --}}
   <div class="links d-flex justify-content-center">
     {{ $users->links() }}
   </div>
     
-  </div>
-
-
 @endsection

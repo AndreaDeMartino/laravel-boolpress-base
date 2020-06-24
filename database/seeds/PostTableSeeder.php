@@ -23,15 +23,15 @@ class PostTableSeeder extends Seeder
         for ($i = 0; $i < $records; $i++) { 
             
             $newPost = new Post();
+            $title = $faker->text(50);
 
             // Prende un id random della tabella users
             $newPost->user_id = $users->random()->id;
 
-            $newPost->title = $faker->text(40);
+            $newPost->title = $title;
             $newPost->body = $faker->text(250);
 
-            // Creaziobe Slug
-            $title = $faker->text(50);
+            // Creazione Slug
             $newPost->slug = Str::slug($title, '-');
 
             $newPost->save();
