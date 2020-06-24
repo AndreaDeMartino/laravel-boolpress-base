@@ -18,6 +18,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('posts.index') }}">Posts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('posts.create') }}">New Posts</a></li>
                 </ul>
             </nav>
             
