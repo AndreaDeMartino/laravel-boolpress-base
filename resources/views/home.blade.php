@@ -2,7 +2,7 @@
 
 @section('main-content')
   <div class="container d-flex justify-content-center mt-5">
-    <h1 class="display-1">Welcome</h1>
+    <h1 class="display-1">Welcome to Boolpress</h1>
   </div>
   
 @endsection

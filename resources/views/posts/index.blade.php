@@ -7,10 +7,11 @@
     <div class="container mb-5">
 
       <div class="post text-center mt-5">
-        <h3 class="text-primary mb-0">{{ $post->title }}</h3>
+        <h2 class="text-primary mb-0">{{ $post->title }}</h2>
         <small class="text-muted">by: {{ ($post->user['name']) }}</small>
         <h5 class="my-3">Message:</h5>
         <p>{{ $post->body }}</p>
+        <a class="btn btn-sm btn-info mb-3" href="{{ route('posts.show', $post->slug) }}">More Info</a>
         
         {{-- Comments --}}
         @foreach ($post->comment as  $key => $comment)
