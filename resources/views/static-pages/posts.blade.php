@@ -2,8 +2,8 @@
 
 @section('main-content')
 
-
-  @foreach ($posts as $post)
+  <div class="container">
+    @foreach ($posts as $post)
     <hr>
     <div class="post">
       <h3>{{ $post->title }}</h3>
@@ -11,8 +11,6 @@
       <p>{{ $post->body }}</p>
 
       <h3>Comments</h3>
-      
-      
       @foreach ($post->comment as $comment)
       <h5>{{ $comment['author'] }}</h5>
       <h5>{{ $comment['message'] }}</h5>
@@ -24,4 +22,6 @@
     
   <h5>Navigation</h5>
   {{ $posts->links() }}
+  </div>
+
 @endsection

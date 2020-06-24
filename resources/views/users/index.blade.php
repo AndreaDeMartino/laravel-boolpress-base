@@ -1,25 +1,63 @@
 @extends('layout.main')
 
 @section('main-content')
+  <div class="container">
+    <h1 class="text-center display-4 my-3">Users List</h1>
 
-  <h1>Users List</h1>
 
+    <div class="container">
+      @foreach($users as $user)
+      <div class="row d-flex justify-content-center mb-5">
+        
+        <ul class="user col-6 m-4 list-group list-group-flush text-center">
+          <li class="list-group-item active h6">{{ $user->name }}</li>
+          <li class="list-group-item"><small>Email: {{ $user->email }}</small></li>
+      
+          {{-- Dettagli della tabella info joinata, richiamati tramite $user (nome public function del modello) --}}
+          <li class="list-group-item"><small>Phone: {{ $user->info['phone'] }}</small></li>
+          <li class="list-group-item"><small>Address: {{ $user->info['address'] }}</small></li>
+        </ul>
+        
+        <div class="posts container text-center">
+          <h5 class="mb-4 text-primary">Posts</h5>
+          <div class="row d-flex justify-content-center">
+            
+            @foreach($user->posts as $key => $post)
+            <div id="accordion" class="col-3">
 
-  @foreach($users as $user)
-  <div class="user">
-    <h2>{{ $user->name }}</h2>
-    <h5>{{ $user->email }}</h5>
+              <div class="card mb-2">
+        
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-{{$post['id']}}-{{$key+1}}" aria-expanded="true" aria-controls="collapseOne">
+                      <span class="text-dark">{{ $post['title'] }}</span>
+                    </button>
+                  </h5>
+                </div>
+            
+                <div id="collapse-{{$post['id']}}-{{$key+1}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <span class="text-muted">{{ $post['body'] }}</span> 
+                  </div>
+                </div>
+        
+              </div>
 
-    {{-- Dettagli della tabella info joinata, richiamati tramite $user (nome public function del modello) --}}
-    <p>Phone: {{ $user->info['phone'] }}</p>
-    <p>Address: {{ $user->info['address'] }}</p>
-
-    {{-- Titoli della tabella post joinata --}}
-    @foreach($user->posts as $post)
-    <h3>Titolo Post: {{ $post['title'] }}</h3>
-    @endforeach
-
+            </div>
+            @endforeach
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+      @endforeach
+    </div>
+  
+  <div class="links d-flex justify-content-center">
+    {{ $users->links() }}
   </div>
-  @endforeach
+    
+  </div>
+
 
 @endsection

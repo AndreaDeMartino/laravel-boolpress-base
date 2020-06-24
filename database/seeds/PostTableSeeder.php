@@ -5,6 +5,9 @@ use App\Post;
 use App\User;
 use Faker\Generator as Faker;
 
+// Import Str per slug e operazioni stringhe:
+use Illuminate\Support\Str;
+
 class PostTableSeeder extends Seeder
 {
     /**
@@ -26,6 +29,10 @@ class PostTableSeeder extends Seeder
 
             $newPost->title = $faker->text(40);
             $newPost->body = $faker->text(250);
+
+            // Creaziobe Slug
+            $title = $faker->text(50);
+            $newPost->slug = Str::slug($title, '-');
 
             $newPost->save();
         }

@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->text('body');
+            $table->string('slug');
 
             // Relazioni Chiave Secondaria
             $table->foreign('user_id')
