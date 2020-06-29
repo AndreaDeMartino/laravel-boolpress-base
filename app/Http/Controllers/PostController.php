@@ -69,9 +69,6 @@ class PostController extends Controller
 
             return redirect()->route('posts.show', $newPost->slug);
         }
-
-        
-
     }
 
     /**
@@ -98,9 +95,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        
+        // Porto anche i tag
+        $tags = Tag::all();
+
+        // Check su Slug
+        if (empty($post)) {
+            abort('404');
+        }
+
+        return view('posts.edit',compact('post','tags'));
     }
 
     /**
@@ -110,9 +117,29 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'tags.*' => 'exists:tags,id'
+        ]);
+        
+        $data = $request->all();
+
+        $updated = $post->update($data);
+
+        if ($updated){
+            if(!empty($data['tags'])){
+                // Controlla gli id e aggiunge relazioni se mancano
+                $post->tags()->sync($data['tags']);
+            } else{
+                // Elimina tutte le relazioni incoerenti in cascata
+                $post->tags()->detach();
+            }
+
+            return redirect()->route('posts.show',$post ['slug']);
+        }
     }
 
     /**
@@ -121,8 +148,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $title = $post->title;
+        // Rimuovo relazioni
+        $post->tags()->detach();
+
+        $deleted = $post->delete();
+
+        if($deleted){
+           return redirect()->route('posts.index')->with('post-deleted', $title);
+       }
     }
 }

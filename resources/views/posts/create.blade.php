@@ -21,10 +21,10 @@
       <div class="form group">
         <label for="title">Title</label>
         <input type="text" class="form-control" value="{{ old('title') }}" name="title" id="title" >
-        <label for="body" class="mt-4">Body</label>
       </div>
 
       <div class="form group mb-3">
+        <label for="body" class="mt-4">Body</label>
         <textarea class="form-control" name="body" id="body">{{ old('body') }}</textarea>
       </div>
 

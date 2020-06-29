@@ -3,15 +3,22 @@
 @section('main-content')
 
   <div class="container d-flex-column justify-content-center">
+
+    @if (session('post-deleted'))
+      <div class="alert alert-success">
+        <p>Post {{ session('post-deleted') }} eliminated</p>
+      </div>
+    @endif
+
     @foreach ($posts as $post)
     <div class="container mb-5">
 
       <div class="post text-center mt-5">
-        <h2 class="text-primary mb-0">{{ $post->title }}</h2>
-        <small class="text-muted">by: {{ ($post->user['name']) }}</small>
-        <h5 class="mt-2">Message:</h5>
+        <a class="text-primary mb-0 h2" href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
+        <small class="text-muted d-block">by: {{ ($post->user['name']) }}</small>
+        <h5 class="mt-4">Message:</h5>
         <p>{{ $post->body }}</p>
-        <a class="btn btn-sm btn-info mb-5" href="{{ route('posts.show', $post->slug) }}">More Info</a>
+        <a class="btn btn-sm btn-info mb-5" href="{{ route('posts.edit', $post->slug) }}">Edit Post</a>
         
         {{-- Comments --}}
         @foreach ($post->comment as  $key => $comment)
